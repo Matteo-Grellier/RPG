@@ -6,6 +6,7 @@
 #include "./Mage.hpp"
 #include "./Potion.hpp"
 #include "./Exceptions.hpp"
+#include "./Priest.hpp"
 
 
 using namespace std;
@@ -16,19 +17,12 @@ int main(int argc, char const *argv[])
         srand(time(NULL));
         Mage gandalf("Gandalf");
         Barbarian conan("Conan");
-        conan.enterFury();
-        conan.attack(gandalf);
-
-        conan.attack(gandalf);
+        Priest ange("Ange");
+        ange.healSpell(gandalf);
         cout << "Gandalf a " << gandalf.getCurrentHp() << " PV" << endl;
         conan.enterFury();
 
         Potion small(3,100);
-    
-        gandalf += small;
-        gandalf += small;
-        gandalf += small;
-        gandalf += small;
         cout << "All potions were drunk !" << endl;
     }
     catch(IllegalFury& illegalF){
