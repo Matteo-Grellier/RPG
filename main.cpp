@@ -1,11 +1,13 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <unistd.h>
 #include "./Character.hpp"
 #include "./Barbarian.hpp"
 #include "./Mage.hpp"
 #include "./Potion.hpp"
 #include "./Exceptions.hpp"
+#include "./Menu.hpp"
 
 
 using namespace std;
@@ -14,6 +16,14 @@ int main(int argc, char const *argv[])
 {
     try {
         srand(time(NULL));
+        Menu m;
+
+        m.start();
+        m.screenText("heyyy");
+        sleep(1);
+        m.loading();
+
+
         Mage gandalf("Gandalf");
         Barbarian conan("Conan");
         conan.enterFury();
@@ -25,7 +35,6 @@ int main(int argc, char const *argv[])
 
         Potion small(3,100);
     
-        gandalf += small;
         gandalf += small;
         gandalf += small;
         gandalf += small;
