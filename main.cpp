@@ -19,8 +19,13 @@ int main(int argc, char const *argv[])
         Menu m;
 
         m.start();
-        m.screenText("heyyy");
+        m.simpleText("heyyy");
         sleep(1);
+        m.loading();
+        m.toScreen(
+        "   ",
+        "         (╯°□°）╯︵ ┻━┻",
+        "   ");
         m.loading();
 
 

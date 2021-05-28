@@ -11,7 +11,8 @@ class Menu {
     void refresh();
     void loading();
     void start();
-    void screenText(string text);
+    void simpleText(string text);
+    void toScreen(string line1, string line2, string line3);
 };
 
 #endif
