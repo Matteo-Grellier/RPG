@@ -34,6 +34,10 @@ void Character::attack(Character& defender) {
     defender.receiveDamage(damage);
 }
 
+void Character::increaseDefense(Character& other, int valueToIncrease) {
+    other.defense += valueToIncrease;
+}
+
 int Character::getCurrentHp(){
     return this->hp;
 }

@@ -13,6 +13,7 @@ enum Job {
     DruidJob,
     PriestJob,
     PaladinJob,
+    MonsterJob
 };
 
 class Character
@@ -44,6 +45,8 @@ class Character
     Character& operator+=(Potion& p);
 
     void attack(Character& defender);
+
+    void increaseDefense(Character& defender, int valueToIncrease);
 
     int getCurrentHp();
 
