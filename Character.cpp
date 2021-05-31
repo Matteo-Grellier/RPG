@@ -8,6 +8,7 @@ Character::Character(string name, Job job, int pAtt, int mAtt, int def, int maxH
     this->defense = def;
     this->maxHp = maxHp;
     this->hp = maxHp;
+    characterList.push_back(this);
 }
 
 
@@ -40,6 +41,10 @@ void Character::increaseDefense(Character& other, int valueToIncrease) {
 
 int Character::getCurrentHp(){
     return this->hp;
+}
+
+int Character::getDefense() {
+    return this->defense;
 }
 
 void Character::receiveDamage(int damage){

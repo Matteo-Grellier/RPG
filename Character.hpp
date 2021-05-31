@@ -2,6 +2,7 @@
 #define CHARACTER_HPP
 #include "./Potion.hpp"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -30,6 +31,8 @@ class Character
     int maxHp;
     int hp;
 
+    static vector<Character*> characterList;
+
     private:
     Job job;
 
@@ -49,6 +52,8 @@ class Character
     void increaseDefense(Character& defender, int valueToIncrease);
 
     int getCurrentHp();
+
+    int getDefense();
 
     public:
     void receiveDamage(int damage);
