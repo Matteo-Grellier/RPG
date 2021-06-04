@@ -13,6 +13,8 @@ class Menu {
     void start();
     void simpleText(string text);
     void toScreen(string line1, string line2, string line3);
+    string ask(string message);
+    void actions(Character& character);
 };
 
 #endif

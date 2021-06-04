@@ -19,18 +19,45 @@ int main(int argc, char const *argv[])
         Menu m;
 
         m.start();
-        m.simpleText("heyyy");
-        sleep(1);
-        m.loading();
-        m.toScreen(
-        "   ",
-        "         (╯°□°）╯︵ ┻━┻",
-        "   ");
-        m.loading();
+
+        // m.simpleText("heyyy");
+        // sleep(1);
+        // m.loading();
+        // m.toScreen(
+        // "   ",
+        // "         (╯°□°）╯︵ ┻━┻",
+        // "   ");
+        // m.loading();
+
+        string characterName;
+        string charactersType[3] = {"Mage", "Barbarian", "Priest"};
+
+        for (int i = 0; i < 3; i++) {
+            string charactersType[3] = {"Mage", "Barbarian", "Priest"};
+            characterName = m.ask("Select a name for your " + charactersType[i] + " character");
+
+            if (i == 0) {
+                Mage mage(characterName);
+
+            } else if (i == 1) {
+                Barbarian barbarian(characterName);
+
+            } else {
+                // Priest priest(characterName);
+            }
+        }
+
+        //creer les monstres 
+
+        //choix des tours
+
+        m.actions(mage);
 
 
-        Mage gandalf("Gandalf");
-        Barbarian conan("Conan");
+        /* 
+
+        ---code by julien---
+
         conan.enterFury();
         conan.attack(gandalf);
 
@@ -44,6 +71,7 @@ int main(int argc, char const *argv[])
         gandalf += small;
         gandalf += small;
         cout << "All potions were drunk !" << endl;
+        */
     }
     catch(IllegalFury& illegalF){
         cout << "An illegal barbarian fury operation occured : " << illegalF.what() << endl;
