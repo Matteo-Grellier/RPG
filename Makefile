@@ -23,7 +23,7 @@ Priest.o : Priest.cpp Priest.hpp
 	g++ -c Priest.cpp -o Priest.o
 
 Monster.o : Monster.cpp Monster.hpp
-g++ -c Priest.cpp -o Priest.o
+	g++ -c Monster.cpp -o Monster.o
 
 clean : 
 	rm *.o

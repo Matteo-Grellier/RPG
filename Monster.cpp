@@ -2,10 +2,10 @@
 
 void Monster::teamAttack() {
     int damage = 0;
-    int nbrOfCharacters = characterList.size();
+    int nbrOfCharacters = charactersList.size();
 
     //rajouter une sécurité ? avec un if lenght > 0
-    for(Character* character : characterList) {
+    for(Character* character : charactersList) {
 
         damage = (this->physicalAttack / nbrOfCharacters) - character->getDefense();
         character->receiveDamage(damage);

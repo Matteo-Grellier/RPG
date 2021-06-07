@@ -8,7 +8,7 @@ Character::Character(string name, Job job, int pAtt, int mAtt, int def, int maxH
     this->defense = def;
     this->maxHp = maxHp;
     this->hp = maxHp;
-    characterList.push_back(this);
+    charactersList.push_back(this);
 }
 
 

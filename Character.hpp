@@ -22,6 +22,7 @@ class Character
 
     public:
     string name;
+    vector<Character*> charactersList;
 
     protected:
     
@@ -30,8 +31,6 @@ class Character
     int defense;
     int maxHp;
     int hp;
-
-    static vector<Character*> characterList;
 
     private:
     Job job;
@@ -57,6 +56,7 @@ class Character
 
     public:
     void receiveDamage(int damage);
+
 };
 
 #endif

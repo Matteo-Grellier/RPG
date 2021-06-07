@@ -7,6 +7,7 @@
 #include "./Potion.hpp"
 #include "./Exceptions.hpp"
 #include "./Priest.hpp"
+#include "./Monster.hpp"
 
 
 using namespace std;

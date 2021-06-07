@@ -2,6 +2,7 @@
 #define MAGE_HPP
 #include "./Character.hpp"
 #include <string>
+#include <vector>
 #include <cstdlib>
 
 using namespace std;
