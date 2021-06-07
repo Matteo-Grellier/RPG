@@ -38,6 +38,12 @@ int Character::getCurrentHp(){
     return this->hp;
 }
 
+string Character::getJob(){
+    return to_string(this->job);
+
+}
+
+
 void Character::receiveDamage(int damage){
     if(damage < 0) {
         damage = 0;

@@ -47,6 +47,8 @@ class Character
 
     int getCurrentHp();
 
+    string getJob();
+
     public:
     void receiveDamage(int damage);
 };

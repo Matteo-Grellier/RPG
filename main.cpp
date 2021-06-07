@@ -14,9 +14,11 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    srand(time(NULL));
+    Menu m;
+
+
     try {
-        srand(time(NULL));
-        Menu m;
 
         m.start();
 
@@ -29,29 +31,40 @@ int main(int argc, char const *argv[])
         // "   ");
         // m.loading();
 
+        Mage mage("Mage");
+        Barbarian barbarian("Barbarian");
+        // Priest priest("Priest");
+        //Monster monster1("monster1");
+        //Monster monster2("monster2");
+        //Monster monster3("monster3");
+
         string characterName;
         string charactersType[3] = {"Mage", "Barbarian", "Priest"};
 
         for (int i = 0; i < 3; i++) {
             string charactersType[3] = {"Mage", "Barbarian", "Priest"};
-            characterName = m.ask("Select a name for your " + charactersType[i] + " character");
+            characterName = m.ask("", "Select a name for your " + charactersType[i] + " character");
 
             if (i == 0) {
-                Mage mage(characterName);
+                mage.name = characterName;
 
             } else if (i == 1) {
-                Barbarian barbarian(characterName);
+                barbarian.name = characterName;
 
             } else {
-                // Priest priest(characterName);
+                // priest.name = characterName;
             }
         }
+
+        m.actions(mage);
+
+        m.simpleText("b");
 
         //creer les monstres 
 
         //choix des tours
 
-        m.actions(mage);
+        // m.actions(mage);
 
 
         /* 
@@ -83,7 +96,8 @@ int main(int argc, char const *argv[])
         cout << "An exception occured : " << e.what() << endl;
     }
 
-    cout << "End of combat" << endl;
+    // cout << "End of combat" << endl;
+    m.simpleText("End of combat");
 
 
 

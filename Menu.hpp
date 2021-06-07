@@ -3,8 +3,10 @@
 #include "./Character.hpp"
 
 class Menu {
+    private:
     // int remainingCharges;
-    string endLine = string("\e[1A");
+    // string endLine = string("\e[1A");
+    string endLine = string("\e[1A\e[K");
 
     public :
     Menu(){}
@@ -13,7 +15,7 @@ class Menu {
     void start();
     void simpleText(string text);
     void toScreen(string line1, string line2, string line3);
-    string ask(string message);
+    string ask(string line1, string line2);
     void actions(Character& character);
 };
 
