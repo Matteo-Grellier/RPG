@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 
         Mage mage("Mage");
         Barbarian barbarian("Barbarian");
-        // Priest priest("Priest");
+        Priest priest("Priest");
         //Monster monster1("monster1");
         //Monster monster2("monster2");
         //Monster monster3("monster3");
@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
                 barbarian.name = characterName;
 
             } else {
-                // priest.name = characterName;
+                priest.name = characterName;
             }
         }
 

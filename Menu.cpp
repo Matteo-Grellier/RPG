@@ -83,10 +83,10 @@ string Menu::ask(string line1, string line2) {
 
 void Menu::turn(string arrayOfCharacters) {
 
-    for () {
+    // for () {
         
 
-    }
+    // }
 
 }
 

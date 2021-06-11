@@ -54,6 +54,8 @@ class Character
 
     int getDefense();
 
+    string getJob();
+
     public:
     void receiveDamage(int damage);
 
