@@ -15,7 +15,9 @@ class Menu {
     void start();
     void simpleText(string text);
     void toScreen(string line1, string line2, string line3);
+    void devToScreen(string line1, string line2, string line3);
     string ask(string line1, string line2);
+    void turn(string arrayOfCharacters);
     void actions(Character& character);
 };
 

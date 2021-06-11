@@ -35,27 +35,18 @@ void Menu::simpleText(string text){
 }
 
 void Menu::toScreen(string line1, string line2, string line3) {
+    devToScreen(line1, line2, line3);
+    sleep(1);
+}
+
+void Menu::devToScreen(string line1, string line2, string line3) {
     refresh();
 
     string lines[] {line1, line2, line3};
-
-    // for (int i = 0; i < 3; i++) {
-    //     string space = i + " ";
-
-    //     for (int ii = lines[i].length() ; ii < 50; ii++) {
-    //         space += " ";
-    //     }
-
-    //     cout << lines[i] << space << endl;
-        
-    // }
-
+    
     cout << line1 << endl;
     cout << line2 << endl;
     cout << line3 << endl;
-
-
-    sleep(1);
 }
 
 
@@ -78,7 +69,7 @@ string Menu::ask(string line1, string line2) {
     
     string awnser;
 
-    toScreen(
+    devToScreen(
     line1,
     line2 + " :",
     " ");
@@ -90,9 +81,18 @@ string Menu::ask(string line1, string line2) {
 
 };
 
+void Menu::turn(string arrayOfCharacters) {
+
+    for () {
+        
+
+    }
+
+}
+
 void Menu::actions(Character& character) {
 
-    toScreen(
+    devToScreen(
     " ",
     "c'est au tour de " + character.name + " de jouer",
     " ");
@@ -126,7 +126,7 @@ void Menu::actions(Character& character) {
             // character.drink();
 
         } else {
-            toScreen(
+            devToScreen(
             " ",
             "Action inconnu",
             " ");
@@ -139,11 +139,5 @@ void Menu::actions(Character& character) {
     } else {
         
 
-
-
-
-
     }
-
-
 }

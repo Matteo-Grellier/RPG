@@ -58,13 +58,14 @@ int main(int argc, char const *argv[])
 
         m.actions(mage);
 
-        m.simpleText("b");
-
         //creer les monstres 
 
         //choix des tours
 
         // m.actions(mage);
+
+        
+
 
 
         /* 
