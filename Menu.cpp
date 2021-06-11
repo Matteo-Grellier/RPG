@@ -113,7 +113,7 @@ void Menu::actions(Character& character) {
                 "quel personnage souhaitez vous attaquer ?");
 
 
-                character.attack();
+                // character.attack();
 
 
             } else if (awnser == "classe") {
@@ -156,10 +156,10 @@ string Menu::isEndOfCombat(vector<Character*>  arrayOfCharacters){
 
     for (int i = 0; i < arrayOfCharacters.size(); i++ ) { //for every characters
         
-        if(arrayOfCharacters[i]->hp <= 0 && arrayOfCharacters[i]->getJob() != "Monster") {
+        if(arrayOfCharacters[i]->getCurrentHp() <= 0 && arrayOfCharacters[i]->getJob() != "Monster") {
             deadGoodGuys++;
 
-        } else if(arrayOfCharacters[i]->hp <= 0 && arrayOfCharacters[i]->getJob() == "Monster") {
+        } else if(arrayOfCharacters[i]->getCurrentHp() <= 0 && arrayOfCharacters[i]->getJob() == "Monster") {
             deadMonsters++;
 
         }
