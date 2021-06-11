@@ -7,6 +7,8 @@
 #include "./Mage.hpp"
 #include "./Potion.hpp"
 #include "./Exceptions.hpp"
+#include "./Monster.hpp"
+#include "./Priest.hpp"
 #include "./Menu.hpp"
 
 
