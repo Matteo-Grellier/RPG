@@ -21,3 +21,11 @@ void Priest::healSpell(Character& other){
     cout<<"vie rendu"<<healValue;
     other.heal(healValue);
 }
+
+string Priest::getSpecialActionName() {
+    if(tryUsingMp(0)) {
+        return "Soignez un allié";
+    } else {
+        return "Soignez un allié (plus assez de point magique...)";
+    }
+}

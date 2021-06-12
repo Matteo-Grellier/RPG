@@ -26,3 +26,11 @@ void Barbarian::leaveFury(){
     defense = baseDefense;
     inFury = false;
 }
+
+string Barbarian::getSpecialActionName() {
+    if(this->inFury) {
+        return "Entrer en Furie";
+    } else {
+        return "Sortir de Furie";
+    }
+}

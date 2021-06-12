@@ -63,3 +63,7 @@ void Character::receiveDamage(int damage){
         this->hp -= damage;
     }
 }
+
+string Character::getSpecialActionName() {
+    return "Action spéciale";
+}
