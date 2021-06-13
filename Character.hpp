@@ -22,7 +22,7 @@ class Character
 
     public:
     string name;
-    vector<Character*> charactersList;
+    static vector<Character*> charactersList;
 
     protected:
     
@@ -54,7 +54,7 @@ class Character
 
     int getDefense();
 
-    string getJob();
+    int getJob();
 
     public:
     void receiveDamage(int damage);

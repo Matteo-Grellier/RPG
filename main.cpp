@@ -14,6 +14,8 @@
 
 using namespace std;
 
+vector<Character*> Character::charactersList;
+
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
@@ -35,10 +37,17 @@ int main(int argc, char const *argv[])
         string characterName;
         string charactersType[3] = {"Mage", "Barbarian", "Priest"};
 
+        // std::vector<Character*> charactersList {&mage, &barbarian, &priest, &monster1, &monster2, &monster3};
         //create characters and select names
         for (int i = 0; i < 3; i++) {
-            string charactersType[3] = {"Mage", "Barbarian", "Priest"};
-            characterName = m.ask("", "Select a name for your " + charactersType[i] + " character");
+            // m.refresh();
+            m.devToScreen(
+                "",
+                "Select a name for your " + charactersType[i] + " character",
+                ""
+            );
+              
+            cin >> characterName;
 
             if (i == 0) {
                 mage.name = characterName;
@@ -55,7 +64,12 @@ int main(int argc, char const *argv[])
 
         
         //faire des tours tant que tt le monde n'est pas mort
-        m.turn(mage.charactersList);
+        // m.turn(Character::charactersList);
+
+        while(!m.isEndOfCombat()) {
+            m.turn();
+        }
+
 
         
 
@@ -91,7 +105,7 @@ int main(int argc, char const *argv[])
     }
 
     // cout << "End of combat" << endl;
-    m.toScreen("","End of combat","");
+    m.devToScreen("","End of combat","");
 
 
 

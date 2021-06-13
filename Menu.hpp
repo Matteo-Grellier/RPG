@@ -16,11 +16,13 @@ class Menu {
     void simpleText(string text);
     void toScreen(string line1, string line2, string line3);
     void devToScreen(string line1, string line2, string line3);
-    string ask(string line1, string line2);
-    void turn(vector<Character*>  arrayOfCharacters);
+    int ask(string line1, string line2);
+    // void turn(vector<Character*>  arrayOfCharacters);
+    void turn();
     void actions(Character& character);
-    string isEndOfCombat(vector<Character*>  arrayOfCharacters);
+    bool isEndOfCombat();
     void end(string endtype);
+    string targetListing();
 
 };
 

@@ -10,9 +10,9 @@ class Monster : public Character {
     public:
     Monster(string name) : Character(name,Job::MonsterJob,250,0,30,800){}
     void teamAttack();
-    void randomAction(Character& target);
+    void randomAction();
 
-    void launchSpecialAction(Character& target) override;
+    void launchSpecialAction(Character& c) override;
 };
 
 #endif

@@ -12,18 +12,20 @@ void Monster::teamAttack() {
     }
 }
 
-void Monster::randomAction(Character& target) {
+void Monster::randomAction() {
     int randomNbr = rand()%3;
+    int target = rand()%3;
 
     if(randomNbr == 0) {
-        this->attack(target);
+        
+        this->attack(*Character::charactersList[target]);
     } else if (randomNbr == 1) {
         this->teamAttack();
     } else {
-        this->increaseDefense(target,20);
+        this->increaseDefense(*Character::charactersList[target],20);
     }
 }
 
-void Monster::launchSpecialAction(Character& target) {
-    randomAction(target);
+void Monster::launchSpecialAction(Character& c) {
+    randomAction();
 }

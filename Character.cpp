@@ -47,8 +47,8 @@ int Character::getDefense() {
     return this->defense;
 }
 
-string Character::getJob(){
-    return to_string(this->job);
+int Character::getJob(){
+    return this->job;
 
 }
 
