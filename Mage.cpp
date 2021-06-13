@@ -26,3 +26,7 @@ string Mage::getSpecialActionName() {
         return "Lancez une boule de feu (plus assez de point magique...)";
     }
 }
+
+void Mage::launchSpecialAction(Character& target) {
+    fireball(target);
+}

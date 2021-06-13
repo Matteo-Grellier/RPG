@@ -17,6 +17,8 @@ public:
     void healSpell(Character& other);
 
     string getSpecialActionName() override;
+
+    void launchSpecialAction(Character& target) override;
 };
 
 

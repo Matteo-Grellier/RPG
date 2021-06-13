@@ -67,3 +67,7 @@ void Character::receiveDamage(int damage){
 string Character::getSpecialActionName() {
     return "Action spéciale";
 }
+
+void Character::launchSpecialAction(Character& target) {
+    this->attack(target);
+}

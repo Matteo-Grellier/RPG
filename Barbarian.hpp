@@ -18,6 +18,8 @@ class Barbarian : public Character {
     void leaveFury();
 
     string getSpecialActionName() override;
+
+    void launchSpecialAction(Character& target) override;
 };
 
 

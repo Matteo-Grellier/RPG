@@ -34,3 +34,11 @@ string Barbarian::getSpecialActionName() {
         return "Sortir de Furie";
     }
 }
+
+void Barbarian::launchSpecialAction(Character& target) {
+    if(inFury) {
+        enterFury();
+    } else {
+        leaveFury();
+    }
+}

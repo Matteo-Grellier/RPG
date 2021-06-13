@@ -20,6 +20,8 @@ class Mage : public Character {
     void fireball(Character& other);
 
     string getSpecialActionName() override;
+
+    void launchSpecialAction(Character& target) override;
 };
 
 #endif

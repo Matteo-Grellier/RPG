@@ -61,6 +61,8 @@ class Character
 
     virtual string getSpecialActionName();
 
+    virtual void launchSpecialAction(Character& target);
+
 };
 
 #endif

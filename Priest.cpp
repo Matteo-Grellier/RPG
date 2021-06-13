@@ -29,3 +29,7 @@ string Priest::getSpecialActionName() {
         return "Soignez un allié (plus assez de point magique...)";
     }
 }
+
+void Priest::launchSpecialAction(Character& target) {
+    healSpell(target);
+}
