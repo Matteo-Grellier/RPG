@@ -1,45 +1,48 @@
 #include "./Menu.hpp"
 #include <iostream>
 #include <unistd.h>
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
+string Menu::endLine = string("\e[1A\e[K");
 
 void Menu::refresh(){ 
-    cout << endLine;
-    cout << endLine;
-    cout << endLine;
+    cout << Menu::endLine;
+    cout << Menu::endLine;
+    cout << Menu::endLine;
 
 }
 
-
 void Menu::start(){
 
-    devToScreen(
-    "Welcome to the PURPL RPG",
-    "   by PURPL STUDIO®",
-    "");
+    cout << "Welcome to the PURPL RPG" << endl;
+    cout << "   by PURPL STUDIO®" << endl;
+    cout << " " << endl;
 
-    sleep(3);
+    sleep(2);
 
     loading();
 
 }
 
 void Menu::toScreen(string line1, string line2, string line3) {
-    devToScreen(line1, line2, line3);
-    sleep(1);
+    Menu::devToScreen(
+    line1,
+    line2,
+    line3);
+
+    sleep(2);
+    
 }
 
 void Menu::devToScreen(string line1, string line2, string line3) {
     refresh();
-
-    string lines[] {line1, line2, line3};
     
     cout << line1 << endl;
     cout << line2 << endl;
     cout << line3 << endl;
+
 }
 
 
@@ -58,123 +61,162 @@ void Menu::loading(){
 
 }
 
-string Menu::ask(string line1, string line2) {
+int Menu::ask(string line1, string line2) {
     
-    string awnser;
+    int answer;
 
     devToScreen(
     line1,
     line2 + " :",
     " ");
 
-    cout << endLine;
-    cin >> awnser;
+    cout << Menu::endLine;
+    cin >> answer;
 
-    return awnser;
+    return answer;
 
 };
 
-void Menu::turn(vector<Character*> arrayOfCharacters) {
+void Menu::turn() {
 
-    for (int i = 0; i < arrayOfCharacters.size(); i++ ) { //for every characters
-        actions( *arrayOfCharacters[i] );
+    vector<Character*> charactersList = Character::charactersList;
+    vector<int> speedList;
+    vector<Character*> charactersOrdered;
+
+
+    for (Character* c : Character::charactersList) {
+        speedList.push_back(c->speed);
 
     }
 
+    sort(speedList.begin() , speedList.end(), greater<int>());
+
+    for (int speed : speedList) {
+
+        for (Character* c : Character::charactersList) {
+
+            if (c->speed == speed ) {
+
+                charactersOrdered.push_back(c);
+
+            }
+        }
+
+    }  
+
+    for (Character* c : charactersOrdered) {
+
+        if (!isEndOfCombat() && c->getCurrentHp() != 0) {
+            actions(*c);
+        } else {
+            return;
+        }       
+    }
+    return;
+}
+
+string Menu::targetListing() {
+    string buffStr = "";
+    int buffInt = 0;
+
+    for (Character* c : Character::charactersList) {
+
+        if(c->getCurrentHp() != 0) {
+            buffStr += to_string(buffInt) + ". " + c->name + " | ";
+        }
+
+        buffInt++;
+
+    }
+
+    return buffStr;
 }
 
 void Menu::actions(Character& character) {
 
-    string isEndCombat = isEndOfCombat(character.charactersList);
 
-    if ( isEndCombat == "win") {
-        end("win");
+    toScreen(
+    " ",
+    "c'est au tour de " + character.name + " de jouer",
+    " ");
 
-    } else if ( isEndCombat == "defeat") {
-        end("defeat");
+    if (character.getJob() != 7 ){
 
-    } else {
+        int awnser = ask("| 1. attaquer | 2. " + character.getSpecialActionName() + " | 3. boire une potion |", "quel action souhaitez vous effectuer ?");
+        int subAwnser;
 
-        devToScreen(
-        " ",
-        "c'est au tour de " + character.name + " de jouer",
-        " ");
+        string targetList = targetListing();
 
-        sleep(1);
+        if (awnser == 1) {
+            subAwnser = ask(
+            targetList,
+            "quel personnage souhaitez vous attaquer ?");
 
-        if (character.getJob() != "MonsterJob" ){
 
-            string awnser = ask("| attaquer (\"attaquer\") | action de classe (\"classe\") | boire une potion (\"potion\") |", "quel action souhaitez vous effectuez ?");
-            string subAwnser;
+            character.attack(*Character::charactersList[subAwnser]);
 
-            if (awnser == "attaquer") {
+        } else if (awnser == 2) {
+
+            if (character.getJob() != 3) {
                 subAwnser = ask(
-                " ",
-                "quel personnage souhaitez vous attaquer ?");
-
-
-                // character.attack();
-
-
-            } else if (awnser == "classe") {
-                subAwnser = ask(
-                " ",
+                targetList,
                 "quel personnage voulez vous viser ?");
 
-                // character.launchSpecialAction();
-
-            } else if (awnser == "potion") {
-                subAwnser = ask(
-                " ",
-                "quel personnage voulez vous viser ?");
-
-                // character.drink();
-
+                character.launchSpecialAction(*Character::charactersList[subAwnser]);
             } else {
-                devToScreen(
-                " ",
-                "Action inconnu",
-                " ");
-
-                actions(character);
-
+                character.launchSpecialAction(character);
             }
 
+        } else if (awnser == 3) {
+
+            subAwnser = ask("| 0. Grande potion | 1. Moyenne potion | 2. Petite potion |", "choisissez une potion");
+
+            character.drink(*Character::potionsList[subAwnser]);
 
         } else {
-            
+            toScreen(
+            " ",
+            "Action inconnu",
+            " ");
+
+            actions(character);
 
         }
+
+
+    } else {
+        character.launchSpecialAction(character);
     }
 }
 
-string Menu::isEndOfCombat(vector<Character*>  arrayOfCharacters){
+bool Menu::isEndOfCombat(){
 
     int deadGoodGuys = 0;
     int deadMonsters = 0;
     string awnser = "none";
 
-    for (int i = 0; i < arrayOfCharacters.size(); i++ ) { //for every characters
+    for (Character* c : Character::charactersList) { //for every characters
         
-        if(arrayOfCharacters[i]->getCurrentHp() <= 0 && arrayOfCharacters[i]->getJob() != "Monster") {
+        if(c->getCurrentHp() <= 0 && c->getJob() != 7) {
             deadGoodGuys++;
 
-        } else if(arrayOfCharacters[i]->getCurrentHp() <= 0 && arrayOfCharacters[i]->getJob() == "Monster") {
+        } else if(c->getCurrentHp() <= 0 && c->getJob() == 7) {
             deadMonsters++;
 
         }
 
         if (deadMonsters == 3) {
-            awnser = "win";
+            end("win");
+            return true;
 
         } else if (deadGoodGuys == 3) {
-            awnser = "defeat";
+            end("defeat");
+            return true;
         }
-
-        return awnser;
 
     }
 
+    return false;
 }
 
 void Menu::end(string endtype){
@@ -184,13 +226,14 @@ void Menu::end(string endtype){
         "",
         "you won mate, well done !",
         "");
+        sleep(1);
 
     } else if ( endtype == "defeat") {
         toScreen(
         "",
         "you failed poor noob...",
         "");
-
+        sleep(1);
     }
 
 }

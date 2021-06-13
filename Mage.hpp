@@ -14,7 +14,7 @@ class Mage : public Character {
     bool tryUsingMp(int mp);
 
     public:
-    Mage(string name) : Character(name,Job::MageJob,15,200,30,1000), maxMp(100), mp(100){
+    Mage(string name) : Character(name,Job::MageJob,15,200,30,1000,100), maxMp(100), mp(100) {
         this->hp = 500;
     }
     void fireball(Character& other);

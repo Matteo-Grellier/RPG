@@ -14,17 +14,18 @@
 
 using namespace std;
 
+vector<Character*> Character::charactersList;
+vector<Potion*> Character::potionsList;
+
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
-    Menu m;
-
 
     try {
 
-        m.start();
+        Menu::start();
 
-        //charcaters
+        //characters
         Mage mage("Mage");
         Barbarian barbarian("Barbarian");
         Priest priest("Priest");
@@ -32,13 +33,26 @@ int main(int argc, char const *argv[])
         Monster monster2("monster2");
         Monster monster3("monster3");
 
+        Potion bigPotion(1, 300);
+        Potion mediumPotion(3, 100);
+        Potion littlePotion(6, 50);
+        Character::potionsList.push_back(&bigPotion);
+        Character::potionsList.push_back(&mediumPotion);
+        Character::potionsList.push_back(&littlePotion);
+
         string characterName;
         string charactersType[3] = {"Mage", "Barbarian", "Priest"};
 
         //create characters and select names
         for (int i = 0; i < 3; i++) {
-            string charactersType[3] = {"Mage", "Barbarian", "Priest"};
-            characterName = m.ask("", "Select a name for your " + charactersType[i] + " character");
+            Menu::devToScreen(
+                "",
+                "Select a name for your " + charactersType[i] + " character",
+                ""
+            );
+
+            cout << Menu::endLine;
+            cin >> characterName;
 
             if (i == 0) {
                 mage.name = characterName;
@@ -51,49 +65,23 @@ int main(int argc, char const *argv[])
             }
         }
 
-        //trier par vitesse 
-
         
         //faire des tours tant que tt le monde n'est pas mort
-        m.turn(mage.charactersList);
-
-        
-
-
-
-        /* 
-
-        ---code by julien---
-
-        conan.enterFury();
-        conan.attack(gandalf);
-
-        conan.attack(gandalf);
-        cout << "Gandalf a " << gandalf.getCurrentHp() << " PV" << endl;
-        conan.enterFury();
-
-        Potion small(3,100);
-    
-        gandalf += small;
-        gandalf += small;
-        gandalf += small;
-        cout << "All potions were drunk !" << endl;
-        */
+        while(!Menu::isEndOfCombat()) {
+            Menu::turn();
+        }
     }
     catch(IllegalFury& illegalF){
         cout << "An illegal barbarian fury operation occured : " << illegalF.what() << endl;
     }
     catch(EmptyPotion& ep){
-        cout << "An illegal barbarian fury operation occured : " << ep.what() << endl;
+        cout << "An illegal drink operation occured : " << ep.what() << endl;
     }
     catch(std::exception& e){
         cout << "An exception occured : " << e.what() << endl;
     }
 
-    // cout << "End of combat" << endl;
-    m.toScreen("","End of combat","");
-
-
+    Menu::devToScreen("","End of combat","");
 
     return 0;
 }

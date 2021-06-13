@@ -7,12 +7,13 @@
 using namespace std;
 
 class Monster : public Character {
-    public:
-    Monster(string name) : Character(name,Job::MonsterJob,250,0,30,800){}
-    void teamAttack();
-    void randomAction(Character& target);
 
-    void launchSpecialAction(Character& target) override;
+    public:
+    Monster(string name) : Character(name,Job::MonsterJob,250,0,30,800,(60+rand()%50)){}
+    void teamAttack();
+    void randomAction();
+
+    void launchSpecialAction(Character& c) override;
 };
 
 #endif
