@@ -18,3 +18,15 @@ void Mage::fireball(Character& other){
     }
     other.receiveDamage(this->magicAttack);
 }
+
+string Mage::getSpecialActionName() {
+    if(tryUsingMp(0)) {
+        return "Lancez une boule de feu";
+    } else {
+        return "Lancez une boule de feu (plus assez de point magique...)";
+    }
+}
+
+void Mage::launchSpecialAction(Character& target) {
+    fireball(target);
+}
