@@ -23,6 +23,9 @@ class Character
     public:
     string name;
     static vector<Character*> charactersList;
+    static vector<Potion*> potionsList;
+    int speed;
+
 
     protected:
     
@@ -31,7 +34,7 @@ class Character
     int defense;
     int maxHp;
     int hp;
-    int speed;
+
 
     private:
     Job job;

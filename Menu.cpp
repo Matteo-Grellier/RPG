@@ -1,7 +1,7 @@
 #include "./Menu.hpp"
 #include <iostream>
 #include <unistd.h>
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -14,13 +14,7 @@ void Menu::refresh(){
 
 }
 
-
 void Menu::start(){
-
-    // toScreen(
-    // "Welcome to the PURPL RPG",
-    // "   by PURPL STUDIO®",
-    // " ");
 
     cout << "Welcome to the PURPL RPG" << endl;
     cout << "   by PURPL STUDIO®" << endl;
@@ -83,42 +77,34 @@ int Menu::ask(string line1, string line2) {
 
 };
 
-// void Menu::turn(vector<Character*> arrayOfCharacters) {
-
-//     for (int i = 0; i < arrayOfCharacters.size(); i++ ) { //for every characters
-//         actions( *arrayOfCharacters[i] );
-
-//     }
-
-// }
-
-// void Menu::turn() {
-//     string answer = "";
-//     for (Character* c : Character::charactersList) {
-//         devToScreen(
-//             "Attaquer (\"attaque\")",
-//             c->getSpecialActionName() + "(\"special\")",
-//             "Boire une potion (\"potion\")"
-//         );
-
-//         cout << "Que voulez vous faire";
-//         cin >> answer;
-//     }
-
-//     return;
-// }
-
 void Menu::turn() {
 
-    vector<Character*> charactersList;
+    vector<Character*> charactersList = Character::charactersList;
+    vector<int> speedList;
+    vector<Character*> charactersOrdered;
+
 
     for (Character* c : Character::charactersList) {
-
+        speedList.push_back(c->speed);
 
     }
-    
 
-    for (Character* c : Character::charactersList) {
+    sort(speedList.begin() , speedList.end(), greater<int>());
+
+    for (int speed : speedList) {
+
+        for (Character* c : Character::charactersList) {
+
+            if (c->speed == speed ) {
+
+                charactersOrdered.push_back(c);
+
+            }
+        }
+
+    }  
+
+    for (Character* c : charactersOrdered) {
 
         if (!isEndOfCombat() && c->getCurrentHp() != 0) {
             actions(*c);
@@ -128,72 +114,6 @@ void Menu::turn() {
     }
     return;
 }
-
-// void Menu::actions(Character& character) {
-
-//     // string isEndCombat = isEndOfCombat();
-
-//     if ( isEndCombat == "win") {
-//         end("win");
-
-//     } else if ( isEndCombat == "defeat") {
-//         end("defeat");
-
-//     } else {
-
-//         devToScreen(
-//         " ",
-//         "c'est au tour de " + character.name + " de jouer",
-//         " ");
-
-//         sleep(1);
-
-//         if (character.getJob() != "MonsterJob" ){
-
-//             string awnser = ask("| attaquer (\"attaquer\") | " + character.getSpecialActionName() + " (\"classe\") | boire une potion (\"potion\") |", "quel action souhaitez vous effectuer ?");
-//             string subAwnser;
-
-//             if (awnser == "attaquer") {
-//                 subAwnser = ask(
-//                 " ",
-//                 "quel personnage souhaitez vous attaquer ?");
-
-
-//                 // character.attack();
-
-
-//             } else if (awnser == "classe") {
-//                 subAwnser = ask(
-//                 " ",
-//                 "quel personnage voulez vous viser ?");
-
-//                 // character.launchSpecialAction();
-
-//             } else if (awnser == "potion") {
-//                 subAwnser = ask(
-//                 " ",
-//                 "quel personnage voulez vous viser ?");
-
-//                 // character.drink();
-
-//             } else {
-//                 devToScreen(
-//                 " ",
-//                 "Action inconnu",
-//                 " ");
-
-//                 actions(character);
-
-//             }
-
-
-//         } else {
-            
-
-//         }
-//     }
-// }
-
 
 string Menu::targetListing() {
     string buffStr = "";
@@ -235,20 +155,6 @@ void Menu::actions(Character& character) {
 
             character.attack(*Character::charactersList[subAwnser]);
 
-            // toScreen(
-            //     character.name + " attaque " + Character::charactersList[subAwnser]->name,
-            //     Character::charactersList[subAwnser]->name + " est à " + to_string(Character::charactersList[subAwnser]->getCurrentHp()),
-            //     ""
-            // );
-
-            // cout << endLine << character.name + " attaque " + Character::charactersList[subAwnser]->name << endl;
-
-            // sleep(2);
-
-            // cout << endLine << Character::charactersList[subAwnser]->name + " est à " + to_string(Character::charactersList[subAwnser]->getCurrentHp())<< endl;
-
-            // sleep(2);
-
         } else if (awnser == 2) {
 
             if (character.getJob() != 3) {
@@ -262,11 +168,10 @@ void Menu::actions(Character& character) {
             }
 
         } else if (awnser == 3) {
-            // subAwnser = ask(
-            // " ",
-            // "quel personnage voulez vous viser ?");
 
-            // character.drink();
+            subAwnser = ask("| 0. Grande potion | 1. Moyenne potion | 2. Petite potion |", "choisissez une potion");
+
+            character.drink(*Character::potionsList[subAwnser]);
 
         } else {
             toScreen(
@@ -301,12 +206,10 @@ bool Menu::isEndOfCombat(){
         }
 
         if (deadMonsters == 3) {
-            // awnser = "win"; //necessaire ? appelé end directement ici ??
             end("win");
             return true;
 
         } else if (deadGoodGuys == 3) {
-            // awnser = "defeat";
             end("defeat");
             return true;
         }

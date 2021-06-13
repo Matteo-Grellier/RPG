@@ -11,7 +11,6 @@ void Monster::teamAttack() {
         ""
     );
 
-    //rajouter une sécurité ? avec un if lenght > 0
     for(Character* character : charactersList) {
 
         if (character->getJob() != 7) {
@@ -33,7 +32,7 @@ void Monster::randomAction() {
     } else if (randomNbr == 1) {
         this->teamAttack();
     } else {
-        this->increaseDefense(*Character::charactersList[target],20);
+        this->increaseDefense(*Character::charactersList[target+3],20);
     }
 }
 

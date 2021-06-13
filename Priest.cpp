@@ -19,7 +19,6 @@ void Priest::healSpell(Character& other){
         return;
     }
     int healValue = (rand() % ( magicAttack*2 - magicAttack)+magicAttack );
-    // cout<<"vie rendu"<<healValue;
     other.heal(healValue);
 
     Menu::toScreen(

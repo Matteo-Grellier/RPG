@@ -25,6 +25,12 @@ void Character::heal(unsigned int healingValue) {
 
 void Character::drink(Potion& p){
     this->heal(p.getHealedHp());
+
+    Menu::toScreen(
+        "",
+        this->name + " a bu une potion qui lui a redonné " + to_string(p.getHealedHp()) + " pv.",
+        this->name + " est à " + to_string(this->getCurrentHp()) + " pv."
+    );
 }
 
 Character& Character::operator+=(Potion& p){
