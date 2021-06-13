@@ -1,4 +1,5 @@
 #include "./Mage.hpp"
+#include "./Menu.hpp"
 
 bool Mage::tryUsingMp(int mp){
     if(this->mp < mp){
@@ -14,9 +15,21 @@ void Mage::fireball(Character& other){
     }
     int randomNumber = rand() % 10;
     if(randomNumber == 0){
+
+        Menu::toScreen(
+            "",
+            this->name + " lance une boule de feu sur " + other.name + " mais trébuche sur un tronc d'arbre et loupe la cible..." ,
+            ""
+        );
         return;
     }
     other.receiveDamage(this->magicAttack);
+
+    Menu::toScreen(
+        "",
+        this->name + " lance une boule de feu sur " + other.name + " et lui inflige " + to_string(magicAttack) + " de dégats" ,
+        other.name + " est à " + to_string(other.getCurrentHp()) + " pv."
+    );
 }
 
 string Mage::getSpecialActionName() {

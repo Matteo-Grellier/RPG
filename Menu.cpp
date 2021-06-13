@@ -5,26 +5,41 @@
 
 using namespace std;
 
+string Menu::endLine = string("\e[1A\e[K");
 
 void Menu::refresh(){ 
-    cout << endLine;
-    cout << endLine;
-    cout << endLine;
+    cout << Menu::endLine;
+    cout << Menu::endLine;
+    cout << Menu::endLine;
 
 }
 
 
 void Menu::start(){
 
-    devToScreen(
-    "Welcome to the PURPL RPG",
-    "   by PURPL STUDIO®",
-    "");
+    // toScreen(
+    // "Welcome to the PURPL RPG",
+    // "   by PURPL STUDIO®",
+    // " ");
 
-    sleep(3);
+    cout << "Welcome to the PURPL RPG" << endl;
+    cout << "   by PURPL STUDIO®" << endl;
+    cout << " " << endl;
+
+    sleep(2);
 
     loading();
 
+}
+
+void Menu::toScreen(string line1, string line2, string line3) {
+    Menu::devToScreen(
+    line1,
+    line2,
+    line3);
+
+    sleep(2);
+    
 }
 
 void Menu::devToScreen(string line1, string line2, string line3) {
@@ -33,6 +48,7 @@ void Menu::devToScreen(string line1, string line2, string line3) {
     cout << line1 << endl;
     cout << line2 << endl;
     cout << line3 << endl;
+
 }
 
 
@@ -60,7 +76,7 @@ int Menu::ask(string line1, string line2) {
     line2 + " :",
     " ");
 
-    cout << endLine;
+    cout << Menu::endLine;
     cin >> answer;
 
     return answer;
@@ -93,9 +109,18 @@ int Menu::ask(string line1, string line2) {
 // }
 
 void Menu::turn() {
+
+    vector<Character*> charactersList;
+
     for (Character* c : Character::charactersList) {
 
-        if (!isEndOfCombat()) {
+
+    }
+    
+
+    for (Character* c : Character::charactersList) {
+
+        if (!isEndOfCombat() && c->getCurrentHp() != 0) {
             actions(*c);
         } else {
             return;
@@ -175,8 +200,13 @@ string Menu::targetListing() {
     int buffInt = 0;
 
     for (Character* c : Character::charactersList) {
-        buffStr += " | " + to_string(buffInt) + ". " + c->name;
+
+        if(c->getCurrentHp() != 0) {
+            buffStr += to_string(buffInt) + ". " + c->name + " | ";
+        }
+
         buffInt++;
+
     }
 
     return buffStr;
@@ -185,12 +215,10 @@ string Menu::targetListing() {
 void Menu::actions(Character& character) {
 
 
-    devToScreen(
+    toScreen(
     " ",
     "c'est au tour de " + character.name + " de jouer",
     " ");
-
-    sleep(1);
 
     if (character.getJob() != 7 ){
 
@@ -207,15 +235,15 @@ void Menu::actions(Character& character) {
 
             character.attack(*Character::charactersList[subAwnser]);
 
-            devToScreen(
-                character.name + " attaque " + Character::charactersList[subAwnser]->name,
-                Character::charactersList[subAwnser]->name + " est à " + to_string(Character::charactersList[subAwnser]->getCurrentHp()),
-                ""
-            );
+            // toScreen(
+            //     character.name + " attaque " + Character::charactersList[subAwnser]->name,
+            //     Character::charactersList[subAwnser]->name + " est à " + to_string(Character::charactersList[subAwnser]->getCurrentHp()),
+            //     ""
+            // );
 
             // cout << endLine << character.name + " attaque " + Character::charactersList[subAwnser]->name << endl;
 
-            sleep(2);
+            // sleep(2);
 
             // cout << endLine << Character::charactersList[subAwnser]->name + " est à " + to_string(Character::charactersList[subAwnser]->getCurrentHp())<< endl;
 
@@ -241,7 +269,7 @@ void Menu::actions(Character& character) {
             // character.drink();
 
         } else {
-            devToScreen(
+            toScreen(
             " ",
             "Action inconnu",
             " ");
@@ -291,14 +319,14 @@ bool Menu::isEndOfCombat(){
 void Menu::end(string endtype){
 
     if ( endtype == "win") {
-        devToScreen(
+        toScreen(
         "",
         "you won mate, well done !",
         "");
         sleep(1);
 
     } else if ( endtype == "defeat") {
-        devToScreen(
+        toScreen(
         "",
         "you failed poor noob...",
         "");

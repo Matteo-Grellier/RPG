@@ -1,15 +1,26 @@
 #include "./Monster.hpp"
+#include "./Menu.hpp"
 
 void Monster::teamAttack() {
     int damage = 0;
     int nbrOfCharacters = charactersList.size();
 
+    Menu::toScreen(
+        "",
+        this->name + " attaque le groupe...",
+        ""
+    );
+
     //rajouter une sécurité ? avec un if lenght > 0
     for(Character* character : charactersList) {
 
-        damage = (this->physicalAttack / nbrOfCharacters) - character->getDefense();
-        character->receiveDamage(damage);
+        if (character->getJob() != 7) {
+            damage = (this->physicalAttack / nbrOfCharacters) - character->getDefense();
+            character->receiveDamage(damage);
+        }
+
     }
+
 }
 
 void Monster::randomAction() {

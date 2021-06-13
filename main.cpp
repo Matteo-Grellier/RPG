@@ -19,12 +19,12 @@ vector<Character*> Character::charactersList;
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
-    Menu m;
+    // Menu m;
 
 
     try {
 
-        m.start();
+        Menu::start();
 
         //charcaters
         Mage mage("Mage");
@@ -41,12 +41,13 @@ int main(int argc, char const *argv[])
         //create characters and select names
         for (int i = 0; i < 3; i++) {
             // m.refresh();
-            m.devToScreen(
+            Menu::devToScreen(
                 "",
                 "Select a name for your " + charactersType[i] + " character",
                 ""
             );
-              
+
+            cout << Menu::endLine;
             cin >> characterName;
 
             if (i == 0) {
@@ -66,8 +67,8 @@ int main(int argc, char const *argv[])
         //faire des tours tant que tt le monde n'est pas mort
         // m.turn(Character::charactersList);
 
-        while(!m.isEndOfCombat()) {
-            m.turn();
+        while(!Menu::isEndOfCombat()) {
+            Menu::turn();
         }
 
 
@@ -105,7 +106,7 @@ int main(int argc, char const *argv[])
     }
 
     // cout << "End of combat" << endl;
-    m.devToScreen("","End of combat","");
+    Menu::devToScreen("","End of combat","");
 
 
 
