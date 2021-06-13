@@ -6,7 +6,7 @@ Ce projet à pour but de réaliser un jeu type RPG en c++ jouable directement da
 
 ## Comment utiliser le projet 
 
-1.Tout d'abord il faut télécharger le projet [ici]()
+1.Tout d'abord il faut télécharger le projet [ici](https://github.com/Matteo-Grellier/RPG/archive/refs/tags/v1.0.zip)
 
 3.Aller à l'emplacement du dossier dans le terminale de votre éditeur de texte
 
