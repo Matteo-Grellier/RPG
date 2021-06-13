@@ -11,6 +11,8 @@ class Monster : public Character {
     Monster(string name) : Character(name,Job::MonsterJob,250,0,30,800){}
     void teamAttack();
     void randomAction(Character& target);
+
+    void launchSpecialAction(Character& target) override;
 };
 
 #endif

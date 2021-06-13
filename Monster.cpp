@@ -23,3 +23,7 @@ void Monster::randomAction(Character& target) {
         this->increaseDefense(target,20);
     }
 }
+
+void Monster::launchSpecialAction(Character& target) {
+    randomAction(target);
+}

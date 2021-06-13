@@ -18,6 +18,10 @@ class Mage : public Character {
         this->hp = 500;
     }
     void fireball(Character& other);
+
+    string getSpecialActionName() override;
+
+    void launchSpecialAction(Character& target) override;
 };
 
 #endif
