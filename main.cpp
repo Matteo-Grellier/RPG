@@ -24,25 +24,18 @@ int main(int argc, char const *argv[])
 
         m.start();
 
-        // m.simpleText("heyyy");
-        // sleep(1);
-        // m.loading();
-        // m.toScreen(
-        // "   ",
-        // "         (╯°□°）╯︵ ┻━┻",
-        // "   ");
-        // m.loading();
-
+        //charcaters
         Mage mage("Mage");
         Barbarian barbarian("Barbarian");
         Priest priest("Priest");
-        //Monster monster1("monster1");
-        //Monster monster2("monster2");
-        //Monster monster3("monster3");
+        Monster monster1("monster1");
+        Monster monster2("monster2");
+        Monster monster3("monster3");
 
         string characterName;
         string charactersType[3] = {"Mage", "Barbarian", "Priest"};
 
+        //create characters and select names
         for (int i = 0; i < 3; i++) {
             string charactersType[3] = {"Mage", "Barbarian", "Priest"};
             characterName = m.ask("", "Select a name for your " + charactersType[i] + " character");
@@ -58,13 +51,11 @@ int main(int argc, char const *argv[])
             }
         }
 
-        m.actions(mage);
+        //trier par vitesse 
 
-        //creer les monstres 
-
-        //choix des tours
-
-        // m.actions(mage);
+        
+        //faire des tours tant que tt le monde n'est pas mort
+        m.turn(mage.charactersList);
 
         
 
@@ -100,7 +91,7 @@ int main(int argc, char const *argv[])
     }
 
     // cout << "End of combat" << endl;
-    m.simpleText("End of combat");
+    m.toScreen("","End of combat","");
 
 
 

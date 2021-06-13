@@ -17,8 +17,11 @@ class Menu {
     void toScreen(string line1, string line2, string line3);
     void devToScreen(string line1, string line2, string line3);
     string ask(string line1, string line2);
-    void turn(string arrayOfCharacters);
+    void turn(vector<Character*>  arrayOfCharacters);
     void actions(Character& character);
+    string isEndOfCombat(vector<Character*>  arrayOfCharacters);
+    void end(string endtype);
+
 };
 
 #endif
